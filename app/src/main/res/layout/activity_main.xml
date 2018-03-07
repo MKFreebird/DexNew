@@ -1,0 +1,128 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black"
+    android:padding="0dip" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/rementis_header">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:background="@drawable/rementis_header_logo">
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/numberInputLayout"
+        android:layout_width="500dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@color/rementis_header"
+        android:orientation="vertical"
+        android:paddingEnd="20dp"
+        android:paddingLeft="20dp">
+
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="Bellen naar:"
+            android:textAllCaps="false"
+            android:textColor="@color/text_input"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/callName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:inputType="textNoSuggestions"
+            android:padding="10dp"
+            android:textColor="@color/off_white"
+            android:textSize="32sp">
+
+            <requestFocus />
+        </EditText>
+
+        <ImageButton
+            android:id="@+id/callButton"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginBottom="30dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/border_green"
+            android:fadingEdge="none"
+            android:src="@drawable/ic_call_white_24dp" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/numberInputLayout"
+        android:layout_centerHorizontal="false"
+        android:layout_marginLeft="20dp"
+        android:baselineAligned="false"
+        android:padding="15dp">
+
+        <TextView
+            android:id="@+id/infoText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ingelogd als:"
+            android:textAllCaps="true"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/rementis_blue" />
+
+        <TextView
+            android:id="@+id/loggedInName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
+            android:text="Someone"
+            android:textAllCaps="true"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/off_white"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true">
+
+        <Button
+            android:id="@+id/stopButton"
+            android:layout_width="115dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="40dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/border"
+            android:text="Uitloggen"
+            android:textAllCaps="true"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/rementis_purple" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/background_dark"
+    android:orientation="vertical"
+    android:weightSum="5">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@android:color/background_dark"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/remoteUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="14dp"
+            android:text="Sample user"
+            android:textColor="@color/rementis_blue"
+            android:textSize="28sp" />
+
+        <TextView
+            android:id="@+id/callState"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Inkomend gesprek"
+            android:textAllCaps="true"
+            android:textColor="@color/footer"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+
+        android:layout_weight="3"
+        android:background="@android:color/background_dark"
+        android:contentDescription="Call background"
+        android:padding="0dip">
+
+    </ImageView>
+
+    <RelativeLayout
+        android:id="@+id/bottomPanel"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:background="@android:color/background_dark"
+        android:gravity="center">
+
+        <ImageButton
+            android:id="@+id/answerButton"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerHorizontal="false"
+            android:layout_centerInParent="false"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/border_green"
+            android:src="@drawable/ic_call_white_24dp" />
+
+        <ImageButton
+            android:id="@+id/declineButton"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_alignTop="@+id/answerButton"
+            android:layout_toEndOf="@+id/answerButton"
+            android:layout_toRightOf="@+id/answerButton"
+            android:background="@drawable/border_red"
+            android:src="@drawable/ic_call_end_white_24dp" />
+    </RelativeLayout>
+
+</LinearLayout>

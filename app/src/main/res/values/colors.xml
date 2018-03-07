@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3f51b5</color>
+    <color name="colorPrimaryDark">#303f9f</color>
+    <color name="colorAccent">#ff4081</color>
+
+    <color name="rementis_purple">#e82e6c</color>
+    <color name="rementis_blue">#009ed8</color>
+    <color name="off_white">#fafafa</color>
+    <color name="greyish">#f2f1f2</color>
+    <color name="rementis_background">#263238</color>
+    <color name="rementis_header">#000000</color>
+
+    <color name="button_green">#2e7d32</color>
+    <color name="button_green_text">#c8e6c9</color>
+
+    <color name="button_red">#932323</color>
+
+    <color name="text_input">#b0bec5</color>
+    <color name="highlight_area">#000000</color>
+    <color name="footer">#455a64</color>
+</resources>

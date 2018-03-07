@@ -1,0 +1,11 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/rementis_blue</item>
+        <item name="colorPrimaryDark">@color/highlight_area</item>
+        <item name="colorAccent">@color/rementis_purple</item>
+    </style>
+
+</resources>
