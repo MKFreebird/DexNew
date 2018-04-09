@@ -2,6 +2,7 @@ package nl.rementis.dex;
 
 import android.app.Service;
 import android.content.Intent;
+import android.hardware.Camera;
 import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
@@ -15,6 +16,7 @@ import com.sinch.android.rtc.SinchError;
 import com.sinch.android.rtc.calling.Call;
 import com.sinch.android.rtc.calling.CallClient;
 import com.sinch.android.rtc.calling.CallClientListener;
+import com.sinch.android.rtc.messaging.MessageClientListener;
 import com.sinch.android.rtc.video.VideoController;
 import com.sinch.android.rtc.video.VideoScalingType;
 
@@ -53,11 +55,12 @@ public class SinchService extends Service {
                     .applicationKey(APP_KEY)
                     .applicationSecret(APP_SECRET)
                     .environmentHost(ENVIRONMENT).build();
+            mSinchClient.getVideoController().setResizeBehaviour(VideoScalingType.ASPECT_FIT);
 
-            mSinchClient.getVideoController().setResizeBehaviour(VideoScalingType.ASPECT_FILL);
+            mSinchClient.getVideoController().setBorderColor(0, 0, 0);
             mSinchClient.setSupportCalling(true);
             mSinchClient.startListeningOnActiveConnection();
-
+            mSinchClient.setSupportMessaging(true);
             mSinchClient.addSinchClientListener(new MySinchClientListener());
             mSinchClient.getCallClient().addCallClientListener(new SinchCallClientListener());
             mSinchClient.start();
@@ -122,6 +125,26 @@ public class SinchService extends Service {
                 return null;
             }
             return mSinchClient.getAudioController();
+        }
+
+        public void addMessageClientListener(MessageClientListener listener) {
+            SinchService.this.addMessageClientListener(listener);
+        }
+
+        public void removeMessageClientListener(MessageClientListener listener) {
+            SinchService.this.removeMessageClientListener(listener);
+        }
+    }
+
+    public void addMessageClientListener(MessageClientListener listener) {
+        if (mSinchClient != null) {
+            mSinchClient.getMessageClient().addMessageClientListener(listener);
+        }
+    }
+
+    public void removeMessageClientListener(MessageClientListener listener) {
+        if (mSinchClient != null) {
+            mSinchClient.getMessageClient().removeMessageClientListener(listener);
         }
     }
 

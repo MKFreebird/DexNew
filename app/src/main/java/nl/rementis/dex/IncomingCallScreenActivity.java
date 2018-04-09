@@ -2,6 +2,7 @@ package nl.rementis.dex;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -27,14 +28,18 @@ public class IncomingCallScreenActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_incoming_call_screen);
 
-        ImageButton answer = (ImageButton) findViewById(R.id.answerButton);
-        answer.setOnClickListener(mClickListener);
-        ImageButton decline = (ImageButton) findViewById(R.id.declineButton);
-        decline.setOnClickListener(mClickListener);
-
         mAudioPlayer = new AudioPlayer(this);
         //mAudioPlayer.playRingtone();
         mCallId = getIntent().getStringExtra(SinchService.CALL_ID);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                answerClicked();
+            }
+        }, 2000);
+
+
     }
 
     @Override
@@ -114,17 +119,4 @@ public class IncomingCallScreenActivity extends BaseActivity {
         }
     }
 
-    private OnClickListener mClickListener = new OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            switch (v.getId()) {
-                case R.id.answerButton:
-                    answerClicked();
-                    break;
-                case R.id.declineButton:
-                    declineClicked();
-                    break;
-            }
-        }
-    };
 }

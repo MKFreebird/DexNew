@@ -1,7 +1,11 @@
 package nl.rementis.dex;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.hardware.Camera;
+import android.hardware.camera2.CameraDevice;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -22,6 +26,7 @@ public class LoginActivity extends BaseActivity implements SinchService.StartFai
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+
         mLoginName = (EditText) findViewById(R.id.loginName);
 
         mLoginButton = (Button) findViewById(R.id.loginButton);
@@ -32,7 +37,9 @@ public class LoginActivity extends BaseActivity implements SinchService.StartFai
                 loginClicked();
             }
         });
+        loginClicked();
     }
+
 
     @Override
     protected void onServiceConnected() {
@@ -64,6 +71,7 @@ public class LoginActivity extends BaseActivity implements SinchService.StartFai
     private void loginClicked() {
         String userName = mLoginName.getText().toString();
 
+
         if (userName.isEmpty()) {
             Toast.makeText(this, "Please enter a name", Toast.LENGTH_LONG).show();
             return;
@@ -78,7 +86,7 @@ public class LoginActivity extends BaseActivity implements SinchService.StartFai
     }
 
     private void openMainActivity() {
-        Intent mainActivity = new Intent(this, MainActivity.class);
+        Intent mainActivity = new Intent(this, HomeScreenActivity.class);
         startActivity(mainActivity);
     }
 

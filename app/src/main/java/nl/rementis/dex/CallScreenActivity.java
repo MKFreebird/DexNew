@@ -1,12 +1,9 @@
 package nl.rementis.dex;
 
 import android.media.AudioManager;
-import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -19,6 +16,19 @@ import com.sinch.android.rtc.calling.CallEndCause;
 import com.sinch.android.rtc.calling.CallState;
 import com.sinch.android.rtc.video.VideoCallListener;
 import com.sinch.android.rtc.video.VideoController;
+
+import android.hardware.camera2.CameraAccessException;
+import android.hardware.camera2.CameraCaptureSession;
+import android.hardware.camera2.CameraCharacteristics;
+import android.hardware.camera2.CameraDevice;
+import android.hardware.camera2.CameraManager;
+import android.hardware.camera2.CameraMetadata;
+import android.hardware.camera2.CaptureRequest;
+import android.hardware.camera2.TotalCaptureResult;
+import android.hardware.camera2.params.StreamConfigurationMap;
+import android.content.Context;
+
+import org.webrtc.sinch.VideoCapturerAndroid;
 
 import java.util.List;
 import java.util.Locale;
@@ -43,6 +53,11 @@ public class CallScreenActivity extends BaseActivity {
     private TextView mCallDuration;
     private TextView mCallState;
     private TextView mCallerName;
+
+    private String cameraId;
+    protected CameraDevice cameraDevice;
+
+    private int mCaptureDevice;
 
     private class UpdateCallDurationTask extends TimerTask {
 
@@ -75,16 +90,6 @@ public class CallScreenActivity extends BaseActivity {
         setContentView(R.layout.activity_call_screen);
 
         mAudioPlayer = new AudioPlayer(this);
-        mCallDuration = (TextView) findViewById(R.id.callDuration);
-        mCallerName = (TextView) findViewById(R.id.remoteUser);
-        mCallState = (TextView) findViewById(R.id.callState);
-        ImageButton endCallButton = (ImageButton) findViewById(R.id.hangupButton);
-        endCallButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                endCall();
-            }
-        });
 
         mCallId = getIntent().getStringExtra(SinchService.CALL_ID);
         if (savedInstanceState == null) {
@@ -115,8 +120,8 @@ public class CallScreenActivity extends BaseActivity {
 
         Call call = getSinchServiceInterface().getCall(mCallId);
         if (call != null) {
-            mCallerName.setText(call.getRemoteUserId());
-            mCallState.setText(call.getState().toString());
+            //mCallerName.setText(call.getRemoteUserId());
+            ///mCallState.setText(call.getState().toString());
             if (call.getState() == CallState.ESTABLISHED) {
                 addVideoViews();
             }
@@ -165,7 +170,7 @@ public class CallScreenActivity extends BaseActivity {
 
     private void updateCallDuration() {
         if (mCallStart > 0) {
-            mCallDuration.setText(formatTimespan(System.currentTimeMillis() - mCallStart));
+            // mCallDuration.setText(formatTimespan(System.currentTimeMillis() - mCallStart));
         }
     }
 
@@ -175,8 +180,14 @@ public class CallScreenActivity extends BaseActivity {
         }
 
         final VideoController vc = getSinchServiceInterface().getVideoController();
+
         if (vc != null) {
             RelativeLayout localView = (RelativeLayout) findViewById(R.id.localVideo);
+            mCaptureDevice = vc.getCaptureDevicePosition(); // FIX THIS
+
+            System.out.println("DEBUG: " + mCaptureDevice);
+
+            vc.setCaptureDevicePosition(0);
             localView.addView(vc.getLocalView());
             localView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -225,12 +236,12 @@ public class CallScreenActivity extends BaseActivity {
         public void onCallEstablished(Call call) {
             Log.d(TAG, "Call established");
             mAudioPlayer.stopProgressTone();
-            mCallState.setText("Verbonden");
+            // mCallState.setText("Verbonden");
             setVolumeControlStream(AudioManager.STREAM_VOICE_CALL);
             AudioController audioController = getSinchServiceInterface().getAudioController();
-            audioController.enableSpeaker();
             mCallStart = System.currentTimeMillis();
             Log.d(TAG, "Call offered video: " + call.getDetails().isVideoOffered());
+            audioController.enableSpeaker();
         }
 
         @Override

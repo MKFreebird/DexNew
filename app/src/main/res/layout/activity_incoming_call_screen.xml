@@ -46,37 +46,4 @@
 
     </ImageView>
 
-    <RelativeLayout
-        android:id="@+id/bottomPanel"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_gravity="center"
-        android:layout_weight="1"
-        android:background="@android:color/background_dark"
-        android:gravity="center">
-
-        <ImageButton
-            android:id="@+id/answerButton"
-            android:layout_width="150dp"
-            android:layout_height="50dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_centerHorizontal="false"
-            android:layout_centerInParent="false"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="20dp"
-            android:background="@drawable/border_green"
-            android:src="@drawable/ic_call_white_24dp" />
-
-        <ImageButton
-            android:id="@+id/declineButton"
-            android:layout_width="150dp"
-            android:layout_height="50dp"
-            android:layout_alignTop="@+id/answerButton"
-            android:layout_toEndOf="@+id/answerButton"
-            android:layout_toRightOf="@+id/answerButton"
-            android:background="@drawable/border_red"
-            android:src="@drawable/ic_call_end_white_24dp" />
-    </RelativeLayout>
-
 </LinearLayout>
